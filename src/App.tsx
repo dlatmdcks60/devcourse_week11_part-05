@@ -1,26 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+// import ClassCom from './ClassCom'
+// import FuncCom from './FuncCom'
+import TodoList from './Todolist'
+import Clock from './Timer'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let name = '리액트';
+
+    return (
+        <div className="container">
+        <TodoList></TodoList>
+        <Clock></Clock>
+        </div>
+    );
 }
 
 export default App;
