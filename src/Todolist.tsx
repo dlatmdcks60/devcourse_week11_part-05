@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import TodoModal from './TodoModal';
 
 type Todo = {
     id: number;
@@ -26,23 +27,23 @@ const TodoList: React.FC = () => {
 
     const addTodo = () => {
         if (newTodo.trim() != '') {
-            setTodos([...todos, { id: Date.now(), text: newTodo, isChecked: false }])
+            setTodos([...todos, { id: Date.now(), text: newTodo, isChecked: false }]);
             setNewTodo('');
         }
-    }
+    };
 
     const removeTodo = (id: number) => {
-        setTodos(todos.filter((todo) => todo.id !== id))
-    }
+        setTodos(todos.filter((todo) => todo.id !== id));
+    };
 
-    const hanldeTodoClick = (todo : Todo) => {
+    const hanldeTodoClick = (todo: Todo) => {
         setShowDetail(true);
         setSelectedTodo(todo);
-    }
+    };
 
     const handleCloseDetail = () => {
         setShowDetail(false);
-    }
+    };
 
     return (
         <div>
@@ -50,10 +51,17 @@ const TodoList: React.FC = () => {
             <p></p>
             <div className="container">
                 <div>
-                    <input type="text" placeholder='할일 입력' style={{ marginRight: '10px', writingMode: 'horizontal-tb' }} onChange={(e) => {
-                        setNewTodo(e.target.value)
-                    }}/>
-                    <Button variant='warning' onClick={addTodo}>추가</Button>
+                    <input
+                        type="text"
+                        placeholder="할일 입력"
+                        style={{ marginRight: '10px', writingMode: 'horizontal-tb' }}
+                        onChange={(e) => {
+                            setNewTodo(e.target.value);
+                        }}
+                    />
+                    <Button variant="warning" onClick={addTodo}>
+                        추가
+                    </Button>
                 </div>
                 <p></p>
                 <div className="board">
@@ -66,22 +74,16 @@ const TodoList: React.FC = () => {
                                         handleCheckedChange(todo.id);
                                     }}
                                 />
-                                <span
-                                    onClick={() => hanldeTodoClick(todo)}
-                                >
-                                    {
-                                        todo.isChecked ? <del>{todo.text}</del> : <span>{todo.text}</span>
-                                    }
-                                </span>
-                                <button
-                                    onClick={() => removeTodo(todo.id)}
-                                    className='delbutton'
-                                >삭제</button>
+                                <span onClick={() => hanldeTodoClick(todo)}>{todo.isChecked ? <del>{todo.text}</del> : <span>{todo.text}</span>}</span>
+                                <button onClick={() => removeTodo(todo.id)} className="delbutton">
+                                    삭제
+                                </button>
                             </li>
                         ))}
                     </ul>
                 </div>
             </div>
+            <TodoModal show={showDetail} todo={selectedTodo} handleClose={handleCloseDetail}></TodoModal>
         </div>
     );
 };
